@@ -1,15 +1,13 @@
-# Importando o Flask
-from flask import Flask, render_template
-# Importando o PyMySQL
-import pymysql
-# Importando as rotas que estão nos controllers
+from flask import Flask
+#importando arquivo routes do controllers
 from controllers import routes
-# Importando os models
+# carregando o Flask na variável app
+app = Flask(__name__, template_folder="views")
+app.secret_key = 'chave'    
 
-# Carregando o Flask na variável app
-app = Flask(__name__, template_folder='views')
-
-# Chamando as rotas
+#Enviando o Flask (app) para a função init_app do routes
 routes.init_app(app)
 
-app.run(host='localhost', port=5000, debug=True)
+if __name__ == '__main__':
+    # Rodando o servidor no localhost, porta 5000
+    app.run(host='0.0.0.0', port=5000, debug=True)

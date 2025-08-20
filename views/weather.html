@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if weather %}
+            <h1>Clima em {{ weather.city }}</h1>
+            
+            <!-- Exibir o ícone do clima -->
+            {% if weather.icon %}
+            <div class="weather-icon">
+                <img src="{{ weather.icon }}" alt="Ícone do clima">
+            </div>
+            {% endif %}
+            
+            <div class="temperature">{{ weather.temperature }}°C</div>
+            <div class="description">{{ weather.description }}</div>
+            
+            <div class="weather-card">
+                <p>🤏 Sensação térmica: {{ weather.feels_like }}°C</p>
+                <p>💧 Umidade: {{ weather.humidity }}%</p>
+                <p>💨 Vento: {{ weather.wind }} km/h</p>
+            </div>
+        {% elif error %}
+            <h1>Ops, algo deu errado</h1>
+            <div class="error">{{ error }}</div>
+        {% else %}
+            <h1>Busque uma cidade</h1>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}">⬅ Buscar outra cidade</a>
+    </div>
+</body>
+</html>
